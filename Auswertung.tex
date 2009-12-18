@@ -1,0 +1,231 @@
+% Copyright 2009 by Henrik Kroeger
+%
+% This file may be distributed and/or modified
+% under the GNU Public License.
+
+\documentclass[a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref}
+
+%\usepackage{parskip}
+
+\usepackage{booktabs}
+\usepackage{cellspace}
+\usepackage{dcolumn}
+
+\usepackage[amssymb]{SIunits}
+\usepackage{sistyle}
+\SIstyle{German}
+
+\usepackage{multicol}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage[loose]{subfigure}
+
+\usepackage{tikz}
+\usepackage{pgffor}
+\usepackage{pgfmath}
+
+\begin{document}
+
+\title{Versuche zum Quanten-Hall-Effekt}
+\author{Sarah Paczkowski%\thanks{Matrikelnummer: 2616640}
+ \and Henrik Kröger%\thanks{Matrikelnummer: 2619840}
+}
+\date{27. und 28. Oktober 2009}
+
+\maketitle
+
+\noindent
+Der \emph{Hall-Effekt} ist das Entstehen einer Potentialdifferenz
+(der \emph{Hall-Spannung} $U_H$)
+in einem elektrischen Leiter senkrecht zu einem elektrischen Strom $I$ und
+senkrecht zu einem Magnetfeld $B$.
+Der \emph{Hall-Widerstand} $R_H = \frac{U_H}{I}$,
+verhält sich beim gewöhnlichen Hall-Effekt wie folgt:
+\begin{equation} R_H = A_H \frac{B}{d} \end{equation}
+$A_H$ ist dabei die materialabhängige \emph{Hall-Konstante} und
+$d$ die Dicke des Leiters in Richtung des Magnetfeldes.
+Im Fall eines Leiters mit nur einer Ladungsträgerart errechnet sich
+die Hall-Konstante aus der Ladungsträgerdichte $n_e$ und
+der Ladung $q$ der Ladungsträger:
+\begin{equation} A_H = \frac{1}{n_eq} \end{equation}
+
+\begin{figure}[hb]
+\begin{center}
+\begin{tikzpicture}
+
+  % Box
+  \draw (0,0) rectangle (2,1);
+  \draw (0.2,0.2) rectangle (2.2,1.2);
+  \draw (0,0) -- (0.2,0.2);
+  \draw (2,1) -- (2.2,1.2);
+  \draw (2,0) -- (2.2,0.2);
+  \draw (0,1) -- (0.2,1.2);
+
+  % Strom I
+  \draw[->] (-1,0.6) -- (0.1,0.6) node[above,near start] {$I$};
+  \draw[->] (2.1,0.6) -- (3,0.6) node[above,near end] {$I$};
+
+  % Megnetfeld B
+  \draw[->,thin] (1.3,0.8) -- (0.8,0.3) node[right,midway] {$B$};
+
+  % Breite d
+  \draw (0,1.25) -- (0.2,1.45) node[right,above] {$d$};
+  \draw[very thin] (0,1) -- (0,1.3);
+  \draw[very thin] (0.2,1.2) -- (0.2,1.5);
+
+  % Voltmeter U
+  \draw (4,0.6) node [circle, draw] (Voltmeter) {V} node[right=4mm] {$U_H$};
+  \draw [out=90,in=90] (1,1.1) to (Voltmeter);
+  \draw [out=-90,in=-90] (1,0.1) to (Voltmeter);
+
+\end{tikzpicture}
+\end{center}
+\caption{Zum klassischen Hall-Effekt}
+\end{figure}
+
+Bei hohen Magnetfeldern (mehrere Tesla) und
+tiefen Temperaturen (wenige Kelvin)
+setzt dagegen der \emph{Quanten-Hall-Effekt} ein.
+Hier hängt die Hall-Spannung nicht mehr linear vom Magnetfeld ab,
+sondern weist Stufen auf.
+Der Hall-Widerstand kommt dabei in Brüchen
+der \emph{von-Klitzing-Konstanten} $R_K$ vor:
+\begin{equation} R_H = \frac{R_K}{\nu} \end{equation}
+Dabei ist $\nu$ der sogenannte \emph{Füllfaktor}.
+Bei ganzzahligen Füllfaktoren spricht man
+vom \emph{integralen Quanten-Hall-Effekt},
+bei gebrochen-rationalen
+vom \emph{fraktionalen Quanten-Hall-Effekt}.
+Für den letzteren braucht es noch tiefere Temperaturen
+und eine geringere \emph{Elektronenkonzentration} $n_e$ im Leiter.
+
+Die von-Klitzing-Konstante lässt sich aus Naturkonstanten errechnen:
+\begin{equation}
+R_K = \frac{h}{e^2} \approx \SI{25,812807}{k\Omega}
+\end{equation}
+
+
+\section*{Proben}
+
+Als Leiter für die Versuche werden Aluminium-Gallium-Arsenid-Heterostrukturen verwendet.
+
+
+\begin{figure}[hb]
+\begin{center}
+\scriptsize
+\subfigure[Probe 4]{
+\begin{tikzpicture}[%
+scale=0.2,
+inner/.style={rectangle,draw,minimum size=2mm},
+outer/.style={rectangle,draw}
+]
+  % Innere Kontakte
+  \draw (0,0) node[inner] (inner 11) {};
+  \draw (0,-9) node[inner] (inner 5) {};
+
+  \draw (-1.5,-3) node[inner] (inner 8) {};
+  \draw (-1.5,-4.5) node[inner] (inner 7) {};
+  \draw (-1.5,-6) node[inner] (inner 6) {};
+  \draw (-1.5,-7.5) node[inner] {};
+
+  \draw (1.5,-1.5) node[inner] {};
+  \draw (1.5,-3) node[inner] (inner 13) {};
+  \draw (1.5,-4.5) node[inner] (inner 19) {};
+  \draw (1.5,-6) node[inner] (inner 4) {};
+
+  % Carrier
+%  \draw (-5,-13) rectangle +(17,17);
+%  \draw (-7,-15) rectangle +(21,21);
+  \foreach \x in {1,...,5}
+    \pgfmathparse{3*(5-\x)-1.75}
+    \draw (\pgfmathresult,-15) node[outer,anchor=south east,minimum height=0.4cm] (outer \x) {0\x};
+  \foreach \x in {11,...,15}
+    \pgfmathparse{3*(\x-11)-1.75}
+    \draw (\pgfmathresult,4) node[outer,anchor=south east,minimum height=0.4cm] (outer \x) {\x};
+  \foreach \x in {6,...,9}
+    \pgfmathparse{2*(\x-6)-9}
+    \draw (-5,\pgfmathresult) node[outer,anchor=south east,minimum width=0.4cm] (outer \x) {0\x};
+  \draw (-5,-1) node[outer,anchor=south east,minimum width=0.4cm] (outer 10) {10};
+  \foreach \x in {16,...,20}
+    \pgfmathparse{2*(16-\x)-1}
+    \draw (14,\pgfmathresult) node[outer,anchor=south east,minimum width=0.4cm] (outer \x) {\x};
+
+  % Verbindungen
+  \draw[in=-90,out=90] (outer 5) to (inner 5);
+  \draw[in=0,out=90] (outer 4) to (inner 4);
+  \draw[in=90,out=-90] (outer 11) to (inner 11);
+  \draw[in=0,out=-90] (outer 13) to (inner 13);
+  \draw[in=180,out=0] (outer 8) to (inner 8);
+  \draw[in=180,out=0] (outer 7) to (inner 7);
+  \draw[in=180,out=0] (outer 6) to (inner 6);
+  \draw[in=0,out=180] (outer 19) to (inner 19);
+
+\end{tikzpicture}
+}
+\qquad
+\subfigure[Probe 5 mit Topgate]{
+\begin{tikzpicture}[%
+scale=0.2,
+inner/.style={rectangle,draw,minimum size=2mm},
+outer/.style={rectangle,draw}
+]
+
+  % Innere Kontakte
+  \draw (0,0) node[inner] (inner 12) {};
+  \draw (0,-9) node[inner] (inner 4) {};
+
+  \draw (-1.5,-1.5) node[inner] {};
+  \draw (-1.5,-3) node[inner] (inner 9) {};
+  \draw (-1.5,-4.5) node[inner] (inner 8) {};
+  \draw (-1.5,-6) node[inner] (inner 7) {};
+  \draw (-1.5,-7.5) node[inner] (inner 5) {};
+
+  \draw (1.5,-1.5) node[inner] (inner 13) {};
+  \draw (1.5,-3) node[inner] (inner 17) {};
+  \draw (1.5,-4.5) node[inner] (inner 18) {};
+  \draw (1.5,-6) node[inner] (inner 3) {};
+
+  % Carrier
+%  \draw (-5,-13) rectangle +(17,17);
+%  \draw (-7,-15) rectangle +(21,21);
+  \foreach \x in {1,...,5}
+    \pgfmathparse{3*(5-\x)-1.75}
+    \draw (\pgfmathresult,-15) node[outer,anchor=south east,minimum height=0.4cm] (outer \x) {0\x};
+  \foreach \x in {11,...,15}
+    \pgfmathparse{3*(\x-11)-1.75}
+    \draw (\pgfmathresult,4) node[outer,anchor=south east,minimum height=0.4cm] (outer \x) {\x};
+  \foreach \x in {6,...,9}
+    \pgfmathparse{2*(\x-6)-9}
+    \draw (-5,\pgfmathresult) node[outer,anchor=south east,minimum width=0.4cm] (outer \x) {0\x};
+  \draw (-5,-1) node[outer,anchor=south east,minimum width=0.4cm] (outer 10) {10};
+  \foreach \x in {16,...,20}
+    \pgfmathparse{2*(16-\x)-1}
+    \draw (14,\pgfmathresult) node[outer,anchor=south east,minimum width=0.4cm] (outer \x) {\x};
+
+  % Verbindungen
+  \draw[in=180,out=0] (outer 7) to (inner 7);
+  \draw[in=180,out=0] (outer 8) to (inner 8);
+  \draw[in=180,out=0] (outer 9) to (inner 9);
+  \draw[in=0,out=180] (outer 17) to (inner 17);
+  \draw[in=0,out=180] (outer 18) to (inner 18);
+  \draw[in=90,out=-90] (outer 12) to (inner 12);
+  \draw[in=0,out=-90] (outer 13) to (inner 13);
+  \draw[in=0,out=90] (outer 3) to (inner 3);
+  \draw[in=-90,out=90] (outer 4) to (inner 4);
+  \draw[in=180,out=90] (outer 5) to (inner 5);
+
+\end{tikzpicture}
+}
+\end{center}
+\normalsize
+\caption{Bondschemata}
+\end{figure}
+
+\end{document}
