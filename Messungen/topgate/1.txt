@@ -1,0 +1,7 @@
+Probe:			5
+Strom-+:		12
+Strom--:		4
+Hall-Spannung-+:	17
+Hall-Spannung--:	9
+Längsspanung-+:		9
+Längsspannung--:	8

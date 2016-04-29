@@ -1,0 +1,9 @@
+Probe:			5
+Strom-+:		12
+Strom--:		4
+Längsspanung-+:		17
+Längsspannung--:	18
+Längsspanung-+:		9
+Längsspannung--:	8
+Topgate-Spannung--:	13
+Topgate-Spannung:	10mV

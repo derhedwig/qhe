@@ -1,0 +1,7 @@
+Probe:			5
+Strom-+:		12
+Strom--:		4
+Längsspanung-+:		17
+Längsspannung--:	18
+Längsspanung-+:		3
+Längsspannung--:	18

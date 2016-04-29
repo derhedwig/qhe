@@ -1,0 +1,9 @@
+Probe:			5
+Strom-+:		12
+Strom--:		4
+Hall-Spannung--:	17
+Hall-Spanung-+:		9
+Längsspannung--:	8
+Längsspannung-+:	9
+Topgate-Spannung--:	13
+Topgate-Spannung:	200mV

@@ -1,4 +1,4 @@
-% Copyright 2009 by Henrik Kroeger
+% Copyright 2009 by Henrik Kroeger and Sarah Paczkowski
 %
 % This file may be distributed and/or modified
 % under the GNU Public License.
@@ -8,36 +8,29 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-\usepackage{hyperref}
-
-%\usepackage{parskip}
-
 \usepackage{booktabs}
 \usepackage{cellspace}
 \usepackage{dcolumn}
 
+\usepackage{amsmath}
 \usepackage[amssymb]{SIunits}
 \usepackage{sistyle}
 \SIstyle{German}
 
-\usepackage{multicol}
-
-\usepackage{xcolor}
-\usepackage{graphicx}
-\usepackage{rotating}
 \usepackage[loose]{subfigure}
-
 \usepackage{tikz}
 \usepackage{pgffor}
 \usepackage{pgfmath}
 
+\usepackage[square]{natbib}
+\usepackage{hyperref}
+
 \begin{document}
+\bibliographystyle{geralpha}
 
 \title{Versuche zum Quanten-Hall-Effekt}
-\author{Sarah Paczkowski%\thanks{Matrikelnummer: 2616640}
- \and Henrik Kröger%\thanks{Matrikelnummer: 2619840}
-}
-\date{27. und 28. Oktober 2009}
+\author{Sarah Paczkowski \and Henrik Kröger}
+\date{Durchgeführt 27. und 28. Oktober 2009}
 
 \maketitle
 
@@ -97,7 +90,7 @@ Hier hängt die Hall-Spannung nicht mehr linear vom Magnetfeld ab,
 sondern weist Stufen auf.
 Der Hall-Widerstand kommt dabei in Brüchen
 der \emph{von-Klitzing-Konstanten} $R_K$ vor:
-\begin{equation} R_H = \frac{R_K}{\nu} \end{equation}
+\begin{equation} R_H = \frac{R_K}{\nu} \label{eq:hallwiderstand} \end{equation}
 Dabei ist $\nu$ der sogenannte \emph{Füllfaktor}.
 Bei ganzzahligen Füllfaktoren spricht man
 vom \emph{integralen Quanten-Hall-Effekt},
@@ -114,13 +107,33 @@ R_K = \frac{h}{e^2} \approx \SI{25,812807}{k\Omega}
 
 \section*{Proben}
 
-Als Leiter für die Versuche werden Aluminium-Gallium-Arsenid-Heterostrukturen verwendet.
+Als Leiter für die Versuche werden
+Aluminium-Gallium-Arsenid-Heterostrukturen verwendet.
+Diese werden in $\SI{3}{mm}\times\SI{3}{mm}$ großen Stücken
+aus einem Viertelwafer herausgebrochen.
 
+Mithilfe der UV-Lithographie werden
+die Proben mit der gewünschten Struktur versehen.
+Dazu wird zunächst Fotolack aufgeschleudert.
+Teile des Probenmaterials werden anschließend durch Ätzen entfernt
+und es entsteht die sogenannte Mesa.
+
+Nun wird Germanium, Gold und Nickel auf die Probe aufgedampft und
+der Lack entfernt.
+Des Weiteren werden die elektrischen Kontakte einlegiert.
+
+Bei Probe 5 wird zusätzlich ein \emph{Topgate} durch Lithographie strukturiert.
+Die Topgate-Kontakte sind Schottky-Kontakte,
+da sie nicht einlegiert werden.
+
+Beide Proben werden auf einen Probenhalter aufgebracht und
+die Kontakte der Probe mit denen
+des Probenhalters verbunden (siehe Abbildung~\ref{fig:bondschemata}).
 
 \begin{figure}[hb]
 \begin{center}
 \scriptsize
-\subfigure[Probe 4]{
+\subfigure[Probe 4, ohne Topgate]{
 \begin{tikzpicture}[%
 scale=0.2,
 inner/.style={rectangle,draw,minimum size=2mm},
@@ -170,7 +183,7 @@ outer/.style={rectangle,draw}
 \end{tikzpicture}
 }
 \qquad
-\subfigure[Probe 5 mit Topgate]{
+\subfigure[Probe 5, mit Topgate]{
 \begin{tikzpicture}[%
 scale=0.2,
 inner/.style={rectangle,draw,minimum size=2mm},
@@ -226,6 +239,371 @@ outer/.style={rectangle,draw}
 \end{center}
 \normalsize
 \caption{Bondschemata}
+\label{fig:bondschemata}
 \end{figure}
 
+\pagebreak
+\section*{Magnetotransportmessung}
+Im Folgenden sollen die Eigenschaften der Probe ermittelt werden.
+Dafür werden Hallwiderstand und Längswiderstand in
+Abhängigkeit vom Magnetfeld ermittelt.
+
+Probe 4 wird in den Magnetoprobenstab und
+dieser in die Heliumkanne eingebaut.
+Für jede der Messungen wird das Magnetfeld von $\SI{0}{T}$ bis $\SI{5}{T}$
+hoch- und wieder heruntergefahren.
+Zwischen den Kontakten 5 und 11 fließt ein Strom von $\SI{10}{\mu A}$.
+
+In einer ersten Messung wurde die Hallspannung $U_{xy}$ an den
+Kontakten 8 und 13 gemessen, die Längsspannung $U_{xx}$ an 6 und 8.
+Bei der zweiten Messung kamen die Kontakte 4 und 6 für
+die Hallspannung zum Einsatz, an 4 und 13 wurde die Längsspannung gemessen.
+Bei der dritten Messung wurde über die Kontakte 7 und 8 die Längsspannung gemessen.
+
+In Abbildung~\ref{fig:magnetotransport} sind die entsprechenden Hall- und Längswiderstände
+aus den gemessenen Spannungen dargestellt ($ R_i = \frac{U_i}{\SI{10}{\mu A}} $).
+Die Messwerte vom Hoch- und Herunterfahren des Magnetfeldes
+liegen dabei aufeinander, weswegen nur Messwerte des Hochfahrens dargestellt werden.
+
+\begin{figure}[hb]
+    \input{Magnetotransport_1}
+    \caption{
+	Hall- und Längswiderstände an Probe 4 (kein Topgate)
+	während \SI{10}{\micro{}A} zwischen den Kontakten 5 und 11 fließen.}
+  \label{fig:magnetotransport}
+\end{figure}
+
+
+\subsection*{Elektronenkonzentration}
+Mit den durchgeführten Messungen kann nun die Elektronenkonzentration $n_e$
+in der Probe bestimmt werden. Das soll im Folgenden auf
+drei verschiedene Arten geschehen.
+
+\subsubsection*{Bestimmung über den Füllfaktor}
+Formel~(2.30) \citet{Bockhorn}
+ermöglicht die Berechnung der Elektronenkonzentration
+über den Füllfaktor~$\nu$:
+\begin{equation} n_e = \frac{\nu\, B(\nu)\, e}{h} \end{equation}
+Dafür wird der Füllfaktor~$\nu$ aus den Hallplateaus von
+Abbildung~\ref{fig:magnetotransport} mit Formel~\eqref{eq:hallwiderstand}
+bestimmt.
+$B(\nu)$ bezieht sich auf die Mitte der Hallplateaus,
+welche am genausten über die Minima
+der Schubnikow-de-Haas-Oszillationen\footnote{deutsche Transliteration}
+abgelesen werden.
+
+In Tabelle~\ref{tbl:elektronen_fuellfaktor} finden sich
+die Ergebnisse für die ablesbaren Füllfaktoren.
+Wegen zu hoher Temperaturen können nur zu
+geraden Füllfaktoren Hallplateaus gefunden werden.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{rcccc}
+\toprule
+$\nu$ &
+$\frac{\frac{R_K}{\nu}}{\SI{}{\Omega}}$ &
+$\frac{R^\text{mess}_{xy}}{\SI{}{\Omega}}$ &
+$\frac{B}{\SI{}{T}}$ & 
+$\frac{n_e}{\SI{e15}{m^{-2}}}$ \\
+\midrule
+4 & 6454 & 6349 & 4,79 & \num{4.632} \\
+6 & 4303 & 4300 & 3,21 & \num{4.656} \\
+8 & 3227 & 3227 & 2,41 & \num{4.661} \\
+10& 2581 & 2582 & 1,92 & \num{4.642} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Elektronenkonzentrationen bestimmt über den Füllfaktor}
+\label{tbl:elektronen_fuellfaktor}
+\end{table}
+
+
+\pagebreak
+
+\subsubsection*{Bestimmung über $B^{-1}$-Oszillation}
+Mit Formel (2.31) \citet{Bockhorn}
+kann man die Elektronenkonzentration aus der
+Oszillation~$\Delta\,B^{-1}$
+der Längsspannung~$R_{xx}$ in Abhängigkeit vom
+reziproken Magnetfeld~$B^{-1}$ berechnen:
+\begin{equation}
+n_e = \frac{2e}{h}\left(\Delta B^{-1}\right)^{-1}
+\label{eq:elektronen_osz}
+\end{equation}
+Die Oszillation selbst ist in Abbildung~\ref{fig:elektronen_osz}
+dargestellt.
+Die Maxima und daraus berechnet die Oszillationen
+sind in Tabelle~\ref{tbl:elektronen_osz} zu finden.
+Aus dem Mittelwert $\SI{0.1065}{T^{-1}}$ ergibt sich
+die Elektronenkonzentration:
+\begin{equation*} n_e = \SI{4,5404e15}{m^{-2}} \end{equation*}
+
+\begin{figure}[h!]
+\begin{center}
+\input{Elektronenkonzentration_1.tex}
+\end{center}
+\caption{Längsspannung~$R_{xx}$ in Abhängigkeit vom
+reziproken Magnetfeld}
+\label{fig:elektronen_osz}
+\end{figure}
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+$\frac{B^{-1}}{\SI{}{T^{-1}}}$ &
+$\frac{\Delta B^{-1}}{\SI{}{T^{-1}}}$ \\
+\midrule
+0,2448 & —\\
+0,3580 & 0,1132 \\
+0,4642 & 0,1061 \\
+0,5701 & 0,1059 \\
+0,6763 & 0,1061 \\
+0,7801 & 0,1038 \\
+0,8839 & 0,1038 \\
+\bottomrule
+& 0,1065
+\end{tabular}
+\end{center}
+\caption{Maxima der $B^{-1}$-Oszillation aus
+Abbildung~\ref{fig:elektronen_osz}
+und
+entsprechende Periodendauer~$\Delta\,B^{-1}$,
+sowie Mittelwert}
+\label{tbl:elektronen_osz}
+\end{table}
+
+
+\subsubsection*{Bestimmung durch die Steigung des klassischen Hall-Effekts}
+Nach \citet{Bockhorn} kann mit Formel (2.32) die Elektronenkonzentration
+auch aus der Steigung des Hallwiderstandes $R_{xy}$
+(in Abhängigkeit des Magnetfeldes $B$) im Bereich des klassischen Halleffektes
+bestimmt werden:
+\begin{equation}
+n_e = \frac{1}{e}\left(\frac{\partial R_{xy}}{\partial B}\right)^{-1}
+\label{eq:ele_konz_steigung}
+\end{equation}
+
+Der Bereich des klassischen Hall-Effekts wird hier als dieser angenommen, wo
+das Magnetfeld nicht größer als $\SI{1}{T}$ ist.
+In diesem (siehe Abbildung \ref{fig:magnetotransport}) beträgt die Steigung:
+\begin{equation*}
+\frac{\partial R_{xy}}{\partial B} = \SI{1350,34}{\Omega/T}
+\end{equation*}
+Woraus sich folgende Elektronenkonzentration berechnet:
+\begin{equation*} n_e = \SI{4.6227e15}{m^{-2}} \end{equation*}
+
+
+
+\subsection*{Elektronenbeweglichkeit}
+Nach Formel (2.33) \citet{Bockhorn} berechnet sich
+die Elektronenbeweglichkeit~$\mu_e$ aus
+der Elektronenkonzentration~$n_e$ und
+dem spezifischen Widerstand~$\rho_0$:
+\begin{equation}
+\mu_e = \frac{1}{\rho_0 \, e \, n_e}
+\end{equation}
+Der spezifische Widerstand wiederum lässt sich so angeben:
+\begin{equation}
+\rho_0 = \frac{R_{xx}(B=0) \, b}{l}
+\end{equation}
+Damit:
+\begin{equation}
+\label{eq:elektronenbeweglichkeit}
+\mu_e = \frac{l}{R_{xx}(B=0)\, b \, e \, n_e}
+\end{equation}
+Einsetzen des Mittelwerts der Elektronenkonzentrationen
+\begin{equation*}
+\overline n_e = \SI{4.6257e15}{m^{-2}}
+\end{equation*}
+und des Längswiderstandes $R_{xx}$ bei $B=0$ gemessen zwischen den
+Kontakten 6 und 8 (erste Messung, $l=\SI{550}{\mu m}$)
+\begin{equation*}
+R_{xx}(B=0) = \SI{2.03354E2}{\Omega}
+\end{equation*}
+liefert:
+\begin{equation*}
+\mu_e = \frac{ \SI{550}{\mu m} }
+ 	     {\SI{2.03354E2}{\Omega} \cdot \SI{200}{\mu m} \cdot e \cdot \SI{4.6257e15}{m^{-2}}}
+      = \SI{18.249}{m^2 / Vs}
+\end{equation*}
+
+
+\subsection*{Unterschiede zwischen den Kontaktpaaren}
+
+Wie in Abbildung \ref{fig:magnetotransport} zu sehen ist,
+gibt es keine nennenswerten Unterschiede zwischen den Kontaktpaaren.
+Lediglich liegen die Kontakte 6 und 8, sowie 4 und 13
+doppelt so weit auseinander,
+wie die Kontakte 7 und 8, wodurch die Amplitude der
+Schubnikow-de-Haas-Oszillation erhöht ist.
+
+Die Elektronenbeweglichkeit beim Kontaktpaar 7 und 8 ist
+nach Formel \eqref{eq:elektronenbeweglichkeit}:
+\begin{equation*}
+\mu_e = \frac{ \SI{275}{\mu m} }
+ 	     {\SI{1.04212e2}{\Omega} \cdot \SI{200}{\mu m} \cdot e \cdot \SI{4.6257e15}{m^{-2}}}
+      = \SI{17.805}{m^2 / Vs}
+\end{equation*}
+Das ist ein Unterschied von \SI{2.4}{\%}.
+Der Quanten-Hall-Effekt ist schließlich unabhängig von der Probengeometrie.
+
+\subsection*{keine fraktionalen Füllfaktoren}
+Es wurden keine fraktionalen Füllfaktoren gemessen,
+da die Elektronenbeweglichkeit $\mu_e$ mit $\SI{18.249}{m^2 / Vs}$
+zu gering ist.
+Es ist weiterhin mit dem verwendeten flüssigen Helium nicht kalt genug.
+
+\newpage
+
+\section*{Dauerhafter Photoeffekt}
+Durch Beleuchtung der Probe mit einer LED gelangen Elektronen
+aus dem Gallium-Arsenid-Substrat in das zweidimensionale Elektronengas.
+Da die Probe auf unter $\SI{70}{K}$ abgekühlt wurde,
+bleibt dieser Photostrom auch nach dem Ausschalten der LED erhalten.
+Dadurch erhöht sich die Elektronenkonzentration in der Probe.
+
+Die Messung wurde wieder mit Probe 4 und einem Strom von $\SI{10}{\mu A}$
+zwischen den Kontakten 5 und 11 durchgeführt.
+Vor der Messung wurde die Probe kurz durch die LED beleuchtet.
+In der ersten Messung wurde zweimal die Längsspannung~$U_{xx}$ gemessen und
+zwar zwischen den Kontakten 13 und 4 sowie 6 und 8.
+Bei der zweiten Messung wurde die Hallspannung~$U_{xy}$ an den
+Kontakten 13 und 8 gemessen und die Längsspannung~$U_{xx}$ an 6 und 7.
+
+In Abbildung \ref{fig:magnetotransport_led} sind die
+entsprechenden Hall- und Längswiderstände $R_{xy}$ und $R_{xx}$
+zu den Messwerten der Spannungen vom Hochfahren des Magnetfeldes dargestellt.
+
+\begin{figure}[h!]
+  \begin{center}
+      \input{Magnetotransport_led}
+  \end{center}
+  \caption{
+	Hall- und Längswiderstände an Probe 4 (kein Topgate)
+	während \SI{10}{\micro{}A} zwischen den Kontakten 5 und 11 fließen.
+	Die Probe wurde zuvor von einer LED bestrahlt.
+	Die eingezeichneten Füllfaktoren sind rein rechnerisch bestimmt.}
+  \label{fig:magnetotransport_led}
+\end{figure}
+
+
+\subsubsection*{Elektronenkonzentration}
+Die zu erwartende Erhöhung der Elektronenkonzentration wird wie zuvor
+über die Steigung des klassischen Halleffektes mit
+Formel~\eqref{eq:ele_konz_steigung} berechnet.
+
+In dem Bereich des klassischen Halleffektes
+(siehe Abbildung~\ref{fig:magnetotransport_led}) beträgt die Steigung:
+\begin{equation*}
+\frac{\partial R_{xy}}{\partial B} = \SI{1183,47}{\Omega/T}
+\end{equation*}
+Woraus sich folgende Elektronenkonzentration berechnet:
+\begin{equation*} n_e = \SI{5,2744e15}{m^{-2}} \end{equation*}
+
+Das entspricht einer Erhöhung von \SI{6,517e14}{m^{-2}} (14\%).
+
+\subsubsection*{Elektronenbeweglichkeit}
+
+Die veränderte Elektronenkonzentration beeinflusst 
+die Elektronenbeweglichkeit nach \eqref{eq:elektronenbeweglichkeit} 
+zwischen den Kontakten 6 und 7 wie folgt:
+\begin{equation*}
+\mu_e = \frac{ \SI{275}{\mu m} }
+ 	     {\SI{69,9723}{\Omega} \cdot \SI{200}{\mu m} \cdot e \cdot \SI{5,2744e15}{m^{-2}}}
+      = \SI{23.256}{m^2 / Vs}
+\end{equation*}
+
+%TODO: Hat sich erhöht, sollte sich aber vermindern (?)
+
+\newpage
+
+\section*{Messungen mit Topgate-Spannung}
+
+Im Folgenden wird eine Magnetotransportmessung mit Probe~5
+durchgeführt. Diese besitzt an Kontakt~13 einen sogenannten Topgate-Kontakt.
+Eine angelegte Topgate-Spannung verdrängt Elektronen und vermindert so
+die Elektronenkonzentration.
+Es wird mit einer Topgate-Spannung von \SI{0}{mV}--\SI{200}{mV} gearbeitet.
+Die Ergebnisse finden sich in Abbildung~\ref{fig:magnetotransport_topgate}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \input{Magnetotransport_topgate}
+  \end{center}
+  \caption{
+	Hall- (oben) und Längswiderstände (unten) an Probe 5 (mit Topgate)
+	während \SI{10}{\micro{}A} zwischen den Kontakten 5 und 11 fließen
+	und eine Topgate-Spannung (Legende) an Kontakt~13 anliegt.
+	Die eingezeichneten Füllfaktoren sind rein rechnerisch bestimmt.}
+  \label{fig:magnetotransport_topgate}
+\end{figure}
+
+Man erkennt, dass die Steigung im Graphen der Hallspannung mit steigender
+Topgate-Spannung zunimmt.
+Die Frequenzen der Schubnikow-de-Haas-Oszillationen nehmen ebenfalls zu,
+sowie deren Amplitude.
+
+Ab einer Topgate-Spannung von \SI{200}{mV} fällt der Längswiderstand~$R_xx$
+nicht mehr ab. Offenbar wurden fast alle Elektronen aus der Probe verdrängt.
+
+Eine Lücke im Graphen für die \SI{0}{mV}-Topgate-Spannung bei \SI{3,5}{T}
+entstand aufgrund eines losen Steckers.
+
+
+
+\subsubsection*{Veränderung der Elektronenkonzentration}
+Die angesprochene Verdrängung der Elektronen und die damit veränderte
+Elektronenkonzentration wird nun mit Hilfe der $B^{-1}$-Oszillation
+in Tabelle~\ref{tbl:ele_konz_topgate} berechnet und in
+Abbildung~\ref{fig:ele_konz_topgate} dargestellt.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{rcc}
+\toprule
+$\frac{U_{\text{top}}}{\SI{}{mV}}$ &
+$\frac{\Delta B^{-1}}{\SI{}{1/T}}$ &
+$\frac{n_e}{\SI{e15}{m^{-2}}}$ \\
+\midrule
+0   & \num{0.0998} & 4,8451 \\
+10  & \num{0.1022} & 4,7314 \\
+20  & \num{0.1028} & 4,7037 \\
+30  & \num{0.1046} & 4,6228 \\
+100 & \num{0.1089} & 4,4403 \\
+150 & \num{0.1216} & 3,9765 \\
+200 & \num{0.1652} & 2,9271 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+	Nach Formel~\eqref{eq:elektronen_osz} bestimmte Elektronenkonzentrationen 
+	in Abhängigkeit der Topgate-Spannung}
+\label{tbl:ele_konz_topgate}
+\end{table}
+
+\begin{figure}[h!]
+  \begin{center}
+    \input{Elektronenkonzentration_topgate}
+  \end{center}
+  \caption{
+	Elektronenkonzentration~$n_e$ in Abhängigkeit der
+	Topgate-Spannung~$U_\text{top}$ nach Tabelle~\ref{tbl:ele_konz_topgate}}
+  \label{fig:ele_konz_topgate}
+\end{figure}
+
+
+Die Elektronenkonzentration nimmt offenbar linear mit der Topgate-Spannung
+ab und zwar nach
+\begin{equation*}
+	n_e = \SI{4.9113e-5}{m^{-2}} - \SI{0.008}{m^{-2}V^{-1}} \cdot U_\text{top}
+\end{equation*}
+
+
+
+
+%TODO: Quellen-Versicherung
+\newpage
+\bibliography{Auswertung}{}
 \end{document}
